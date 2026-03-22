@@ -45,19 +45,19 @@ M.availability_grade.form.getNode = function(json) {
         // String has already been escaped using format_string.
         html += '<option value="' + grade.id + '">' + grade.name + '</option>';
     }
-    html += '</select></span></label> <br><span class="availability-group mb-3">' +
-            '<label><input type="checkbox" class="form-check-input position-static mt-0 mx-1" name="min"/>' +
+    html += '</select></span></label> <br><span class="availability-group mb-3 d-flex align-items-center">' +
+            '<label class="d-flex align-items-center"><input type="checkbox" class="form-check-input mt-0 mx-1" name="min"/>' +
             M.util.get_string('option_min', 'availability_grade') +
-            '</label> <label><span class="accesshide">' + M.util.get_string('label_min', 'availability_grade') +
-            '</span><input type="text" class="form-control mx-1" name="minval" title="' +
-            M.util.get_string('label_min', 'availability_grade') + '"/></label>%</span><br>' +
-            '<span class="availability-group mb-3">' +
-            '<label><input type="checkbox" class="form-check-input position-static mt-0 mx-1" name="max"/>' +
+            '</label> <label class="d-flex"><span class="accesshide">' + M.util.get_string('label_min', 'availability_grade') +
+            '</span><input type="text" class="form-control mx-2" name="minval" title="' +
+            M.util.get_string('label_min', 'availability_grade') + '" size="5"/></label>%</span>' +
+            '<span class="availability-group mb-3 d-flex align-items-center">' +
+            '<label class="d-flex align-items-center"><input type="checkbox" class="form-check-input mt-0 mx-1" name="max"/>' +
             M.util.get_string('option_max', 'availability_grade') +
-            '</label> <label><span class="accesshide">' + M.util.get_string('label_max', 'availability_grade') +
-            '</span><input type="text" class="form-control mx-1" name="maxval" title="' +
-            M.util.get_string('label_max', 'availability_grade') + '"/></label>%</span>';
-    var node = Y.Node.create('<div class="d-inline-block d-flex flex-wrap align-items-center">' + html + '</div>');
+            '</label> <label class="d-flex"><span class="accesshide">' + M.util.get_string('label_max', 'availability_grade') +
+            '</span><input type="text" class="form-control mx-2" name="maxval" title="' +
+            M.util.get_string('label_max', 'availability_grade') + '" size="5"/></label>%</span>';
+    var node = Y.Node.create('<div>' + html + '</div>');
 
     // Set initial values.
     if (json.id !== undefined &&
