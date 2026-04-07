@@ -353,7 +353,7 @@ class filetypes_util {
                 'selected' => false,
                 'ext' => '',
                 'types' => array_values($others),
-                'expanded' => true,
+                'expanded' => false,
             ];
         }
 
