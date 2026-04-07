@@ -45,7 +45,6 @@ define(['jquery', 'core/log', 'core/modal_events', 'core/modal_save_cancel', 'co
 
         this.inputField = $('#' + elementId);
         this.wrapperBrowserTrigger = $('[data-filetypesbrowser="' + elementId + '"]');
-        this.wrapperDescriptions = $('[data-filetypesdescriptions="' + elementId + '"]');
 
         if (!this.wrapperBrowserTrigger.length) {
             // This is a valid case. Most probably the element is frozen and
@@ -53,7 +52,7 @@ define(['jquery', 'core/log', 'core/modal_events', 'core/modal_save_cancel', 'co
             return;
         }
 
-        if (!this.inputField.length || !this.wrapperDescriptions.length) {
+        if (!this.inputField.length) {
             Log.error('core_form/filetypes: Unexpected DOM structure, unable to enhance filetypes field ' + elementId);
             return;
         }
@@ -312,7 +311,6 @@ define(['jquery', 'core/log', 'core/modal_events', 'core/modal_save_cancel', 'co
             var allcheckbox = this.browserModal.getRoot().find('input[type="checkbox"][data-filetypesbrowserkey="*"]');
             if (allcheckbox.length && allcheckbox.prop('checked')) {
                 this.inputField.val('*');
-                this.updateDescriptions(['*']);
                 return;
             }
         }
@@ -335,35 +333,6 @@ define(['jquery', 'core/log', 'core/modal_events', 'core/modal_save_cancel', 'co
         });
 
         this.inputField.val(newvalue.join(' '));
-        this.updateDescriptions(newvalue);
-    };
-
-    /**
-     * Describe the selected filetypes in the form when saving the browser.
-     *
-     * @param {Array} keys List of keys to describe
-     * @returns {Promise}
-     */
-    FileTypes.prototype.updateDescriptions = function(keys) {
-
-        var descriptions = [];
-
-        keys.forEach(function(key) {
-            descriptions.push({
-                description: this.browserModal.getRoot().find('[data-filetypesname="' + key + '"]').first().text().trim(),
-                extensions: this.browserModal.getRoot().find('[data-filetypesextensions="' + key + '"]').first().text().trim()
-            });
-        }.bind(this));
-
-        var templatedata = {
-            hasdescriptions: (descriptions.length > 0),
-            descriptions: descriptions
-        };
-
-        return Templates.render('core_form/filetypes-descriptions', templatedata)
-            .then(function(html) {
-                this.wrapperDescriptions.html(html);
-            }.bind(this));
     };
 
     /**
