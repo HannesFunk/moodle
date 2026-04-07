@@ -197,14 +197,9 @@ class MoodleQuickForm_filetypes extends MoodleQuickForm_group {
                     if ($filetypes === ['*'] && !$this->allowall) {
                         $filetypes = [];
                     }
-                    $value['descriptions'] = '<div data-filetypesdescriptions="'.$this->getAttribute('id').'">' .
-                        $OUTPUT->render_from_template('core_form/filetypes-descriptions',
-                            $this->util->describe_file_types($filetypes)).'</div>';
                 }
                 $this->setValue($value);
                 return true;
-                break;
-
         }
 
         return parent::onQuickFormEvent($event, $arg, $caller);
