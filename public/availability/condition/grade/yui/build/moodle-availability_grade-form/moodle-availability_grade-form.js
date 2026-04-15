@@ -57,7 +57,7 @@ M.availability_grade.form.getNode = function(json) {
             '</label> <label class="d-flex"><span class="accesshide">' + M.util.get_string('label_max', 'availability_grade') +
             '</span><input type="text" class="form-control mx-2" name="maxval" title="' +
             M.util.get_string('label_max', 'availability_grade') + '" size="5"/></label>%</span>';
-    var node = Y.Node.create('<div class="">' + html + '</div>');
+    var node = Y.Node.create('<div>' + html + '</div>');
 
     // Set initial values.
     if (json.id !== undefined &&

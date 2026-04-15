@@ -6,7 +6,7 @@ More detailed information on key changes can be found in the [Developer update n
 
 The format of this change log follows the advice given at [Keep a CHANGELOG](https://keepachangelog.com).
 
-## 5.2beta
+## 5.2rc1
 
 ### core
 
@@ -382,6 +382,9 @@ The format of this change log follows the advice given at [Keep a CHANGELOG](htt
 - The `cm_info` class now includes `get_navigation_url()`, `set_navigation_url(?url $url)`, and `reset_navigation_url()` methods, allowing activities to explicitly define, override, or suppress their navigation URL. This customisation can be managed within the `cm_info_dynamic callback`. By setting the navigation URL to null, a module can be effectively excluded from the linear navigation flow, such as the automatic "Previous" and "Next" routing URLs. In cases where no override is specified, `get_navigation_url()` will return the default `$cm->url` by fallback.
 
   For more information see [MDL-87984](https://tracker.moodle.org/browse/MDL-87984)
+- A new protected hidesettings property has been added to pagelib  to force the page to hide the settings menu. Use set_hide_settings()  and get_hide_setting() to fully hide the settings menu.
+
+  For more information see [MDL-88214](https://tracker.moodle.org/browse/MDL-88214)
 
 #### Changed
 
@@ -526,6 +529,15 @@ The format of this change log follows the advice given at [Keep a CHANGELOG](htt
 
 ### core_files
 
+#### Added
+
+- A new method called `removeopt()` has been created in the `curl` class to allow users to remove options previously set with `setopt()`.
+
+  For more information see [MDL-87822](https://tracker.moodle.org/browse/MDL-87822)
+- User can pass `'CURLOPT_USERPWD' => false` to the `$options` array for the `put()` method of `curl` to remove the `CURLOPT_USERPWD` option from the request.
+
+  For more information see [MDL-87822](https://tracker.moodle.org/browse/MDL-87822)
+
 #### Removed
 
 - The following methods have been removed from `public/lib/filestorage/file_storage.php`: - `\file_storage::content_exists()` - `\file_storage::try_content_recovery()`
@@ -628,6 +640,9 @@ The format of this change log follows the advice given at [Keep a CHANGELOG](htt
 - During restore of a question_set_reference, mapping of IDs in the filtercondition is now delegated to qbank plugins. If your qbank plugin defines a filter condition that uses database IDs, add an override of `restore_filtercondition()` to the `condition` class, which checks the condition's data and replaces the IDs with mapped values if required. See  `qbank_managecategories\category_condition` for an example.
 
   For more information see [MDL-86524](https://tracker.moodle.org/browse/MDL-86524)
+- Moved the route for returning counts of questions in each of a course's question banks to `/api/rest/v2/question/counts`, for a more RESTful URL and consistency with other `core_question` routes.
+
+  For more information see [MDL-87264](https://tracker.moodle.org/browse/MDL-87264)
 - Added a new route at `/api/rest/v2/question/categories` for returning a list of question categories in a particular course module.
 
   For more information see [MDL-87264](https://tracker.moodle.org/browse/MDL-87264)
@@ -646,6 +661,9 @@ The format of this change log follows the advice given at [Keep a CHANGELOG](htt
 - The `\core_question\output\switch_question_bank` renderable is now deprecated, as rendering of the switch_question_bank template is now all handled client-side by the `core_question/bank_switcher` Javascript module.
 
   For more information see [MDL-87264](https://tracker.moodle.org/browse/MDL-87264)
+- `core_question\output\question_category_selector::question_count_sql` has been replaces with `core_question\local\bank\question_counts\by_category_query`, to keep all the question counting logic together in one place.
+
+  For more information see [MDL-87848](https://tracker.moodle.org/browse/MDL-87848)
 
 #### Removed
 
