@@ -29,3 +29,11 @@
         max-height: calc((100vh - 8px * 2) - var(--navbar-height)) !important; /* stylelint-disable-line declaration-no-important */
     }
 }
+
+.tox .tox-textarea[data-mce-name="code"] {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+.tox .tox-textarea-wrap .tox-textarea[data-mce-name="code"]:focus {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
