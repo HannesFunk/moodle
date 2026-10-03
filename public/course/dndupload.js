@@ -917,7 +917,8 @@ M.course_dndupload = {
         // Prepare the data to send
         var formData = new FormData();
         try {
-            formData.append('repo_upload_file', file);
+            // MDL-89834: Sending a blob to prevent WebKit from sending an empty body, see WebKit bug 319985.
+            formData.append('repo_upload_file', file.slice(0, file.size, file.type), file.name);
         } catch (e) {
             // Edge throws an error at this point if we try to upload a folder.
             resel.parent.removeChild(resel.li);
