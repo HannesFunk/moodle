@@ -32,3 +32,5 @@ Changed:
    upgrading the library).
  * Edit language/en.js and remove the content for 'filters' (it's a JSON with several fields, such as level or language).
  * Update the version of this library in thirdpartylibs.xml.
+ * Send a blob to prevent WebKit from sending an empty body, see WebKit bug 319985:
+ Use "formData.append('file', file.slice(0, file.size, file.type), filename);" in editor/scripts/h5peditor-file-uploader.js
