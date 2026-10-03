@@ -1102,7 +1102,8 @@ M.form_dndupload.init = function(Y, options) {
 
             // Prepare the data to send
             var formdata = new FormData();
-            formdata.append('repo_upload_file', file); // The FormData class allows us to attach a file
+            // MDL-89834: Sending a blob to prevent WebKit from sending an empty body, see WebKit bug 319985.
+            formdata.append('repo_upload_file', file.slice(0, file.size, file.type), filename);
             formdata.append('sesskey', M.cfg.sesskey);
             formdata.append('repo_id', this.repositoryid);
             formdata.append('itemid', this.options.itemid);
