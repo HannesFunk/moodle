@@ -182,7 +182,9 @@ class FileUploader {
     _createUploadFormData() {
         const formData = new FormData();
         try {
-            formData.append('repo_upload_file', this.fileInfo);
+            // MDL-89834: Sending a blob to prevent WebKit from sending an empty body, see WebKit bug 319985.
+            const file = this.fileInfo;
+            formData.append('repo_upload_file', file.slice(0, file.size, file.type), file.name);
         } catch (error) {
             throw Error(error.dndread);
         }
