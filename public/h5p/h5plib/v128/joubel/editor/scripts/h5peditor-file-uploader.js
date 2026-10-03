@@ -21,7 +21,8 @@ H5PEditor.FileUploader = (function ($, EventDispatcher) {
      */
     self.upload = function (file, filename) {
       var formData = new FormData();
-      formData.append('file', file, filename);
+      // MDL-89834: Sending a blob to prevent WebKit from sending an empty body, see WebKit bug 319985.
+      formData.append('file', file.slice(0, file.size, file.type), filename);
       formData.append('field', JSON.stringify(field));
       formData.append('contentId', H5PEditor.contentId || 0);
 
