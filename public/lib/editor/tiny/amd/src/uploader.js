@@ -99,7 +99,8 @@ export default (editor, filePickerType, blob, fileName, progress) => new Promise
     const formData = new FormData();
     const options = getFilePicker(editor, filePickerType);
 
-    formData.append('repo_upload_file', blob, fileName);
+    // MDL-89834: Sending a blob to prevent WebKit from sending an empty body, see WebKit bug 319985.
+    formData.append('repo_upload_file', blob.slice(0, blob.size, blob.type), fileName);
     formData.append('itemid', options.itemid);
     Object.values(options.repositories).some((repository) => {
         if (repository.type === 'upload') {
